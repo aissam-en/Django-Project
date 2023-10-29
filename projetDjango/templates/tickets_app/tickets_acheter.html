@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+<!-- for stripe
+Stripe product IDs
+Regulier Ticket : prod_O7tS5rZSBCb0iA
+VIP Ticket : prod_O7tTVrK1aE4ZGZ -->
+
+{% load static %}
+
+{% block content %}
+<div class="container bg-white">
+    
+<script src="{% static 'js/tickets_acheter.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/tickets_acheter.css' %}">
+
+    <h2>Panier</h2>
+
+    <form action="{% url 'create_checkout_session' match.id request.user.id%}" method="post">
+        {% csrf_token %}
+
+        <table>
+            <tr>
+                <th>Ticket</th>
+                <th>Type de Ticket</th>
+                <th>Prix</th>
+                <th>Quantite</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td>{{match.match}}</td>
+                <td>
+                    <select name="ticket_type" onchange="updatePrice(this)">
+                        <option value="Regulier">Regulier</option>
+                        <option value="VIP">VIP</option>
+                    </select>
+                </td>
+                <td>120.00 DH</td>
+                <td>
+                    <a class="qnt" onclick="decrementQuantity(this.nextElementSibling);">-</a>
+                    <input name="quantity" type="text" value="1">
+                    <a class="qnt" onclick="incrementQuantity(this.previousElementSibling);">+</a>
+                </td>
+                <td>120.00 DH</td>
+            </tr>
+        </table>
+        <div class="text-end mt-4">
+            <button type="submit" class="btn btn-primary">Checkout</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

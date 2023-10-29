@@ -1,0 +1,50 @@
+/*style de Regulier ticket */
+.Regulier {
+    background-color: #d1e7dd;
+    color: #000;
+    margin: 0;
+    padding: 50;
+    font-size: 16px;
+    line-height: 24px;
+}
+.nbr_tkt_Regulier {
+    font-weight: bold;
+    background-color: #000;
+    color: #d1e7dd;;
+}
+
+/* style de VIP ticket */
+.VIP {
+    background-color: #ffd700;
+    color: #000;
+    margin: 0;
+    padding: 50;
+    font-size: 16px;
+    line-height: 24px;
+}
+.nbr_tkt_VIP {
+    background-color: #000;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.label {
+font-weight: bold;
+}
+
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    button {
+        visibility: hidden;
+    }
+    .telecharger, .ticket-info, img, h4, p.telecharger, span, hr {
+        visibility: visible; 
+        -webkit-print-color-adjust: exact; /* pour afficher le background de ticket apres window.print() */
+        print-color-adjust:exact; /* pour afficher le background de ticket apres window.print() */
+    }
+    
+}
+  

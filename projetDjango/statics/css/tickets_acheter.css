@@ -1,0 +1,33 @@
+table {
+    /* border-collapse: collapse; */
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    /* text-align: left; */
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+input[type="text"] {
+    border: none;
+    text-align: center;
+    width: 50px;
+    /* font-size: 16px;
+    font-weight: bold; */
+}
+
+.qnt {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px;
+    /* text-align: center; */
+    text-decoration: none;
+    /* display: inline-block; */
+    /* font-size: 16px; */
+    /* margin: 4px 2px; */
+    cursor: default;
+    border-radius: 4px;
+}

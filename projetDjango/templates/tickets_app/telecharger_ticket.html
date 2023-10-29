@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+<link rel="stylesheet" href="{% static 'css/tickets_index.css' %}">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 telecharger">
+            <div class="card h-100 card-body ticket-info">
+                <img src="{{ticket.match.image.url}}" style="height: 150px; width: auto;">
+                <div class="card-body ticket-info  {{ ticket.ticket_type }}">
+                    <h4 class="text-center">TICKET N: {{ ticket.id }}</h4>
+                    <p class="text-center telecharger">Ticket {{ numero }}/{{ ticket.nbr }}</p>
+                    <div class="d-flex justify-content-center align-items-center telecharger">
+                        {% if ticket.ticket_type == 'Regulier' %}
+                            <img src="{% static 'Ticket_Reg_logo.png.webp'%}" style="height: 150px; width: auto;" class="card-img-top">
+                        {% endif %}
+                        {% if ticket.ticket_type == 'VIP' %}
+                            <img src="{% static 'Ticket_VIP_logo.png'%}" style="height: 150px; width: auto;" class="card-img-top">
+                        {% endif %}
+                    </div>
+                    <hr>
+                    <p class="telecharger">Nom : <span>{{ticket.client.nom}}</span></p> 
+                    <p class="telecharger">Prenom : <span>{{ticket.client.prenom}}</span></p> 
+                    <hr>
+                    <p class="telecharger">Match : <span>{{ticket.match.match}}</span></p> 
+                    <p class="telecharger">Date du Match : <span>{{ticket.match.date}}</span></p> 
+                    <p class="telecharger">Lieu du Match : <span>{{ ticket.match.lieu }}</span></p> 
+                    <hr>
+                    <div class="text-center">
+                        <button class="btn btn-primary" onclick="printTicket()">Telecharger le Ticket</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function printTicket() {
+    window.print();
+}
+</script>
+
+
+<br>
+{% endblock content %}

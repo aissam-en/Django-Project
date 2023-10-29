@@ -1,0 +1,18 @@
+<!-- for stripe -->
+<!-- https://dashboard.stripe.com/test/payments -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 bg-white">
+  <div class="card text-center shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+      <h1 class="card-title">Paiement succès</h1>
+      <p class="card-text">Merci pour votre achat</p>
+      <a href="{%url 'ticket_detail' request.user.id %}" class="btn btn-primary">Continuer vers mes tickets</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}b

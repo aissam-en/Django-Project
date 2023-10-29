@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+    <script src="{% static 'js/tickets_index.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/tickets_index.css' %}">
+
+ <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for ticket in tickets %}
+        {% for i in ""|center:ticket.nbr %}
+            <div class="col">
+                <div class="card h-100 {{ ticket.ticket_type }}">
+                    <h4 class="text-center">TICKET N: {{ ticket.id }}</h4>
+                    <p class="text-center">Ticket {{ forloop.counter }}/{{ ticket.nbr }}</p>
+                    {% if ticket.ticket_type == 'Regulier' %}
+                        <img src="{% static 'Ticket_Reg_logo.png.webp'%}" style="height: 150px; width: auto;" class="card-img-top">
+                    {% endif %}
+                    {% if ticket.ticket_type == 'VIP' %}
+                        <img src="{% static 'Ticket_VIP_logo.png'%}" style="height: 150px; width: auto;" class="card-img-top">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <div class="card-text">
+                            
+                            <p>Nom : <span>{{ticket.client.nom}}</span></p> 
+                            <p>Prenom : <span>{{ticket.client.prenom}}</span></p> 
+                            <hr>
+                            <p>Match : <span>{{ticket.match.match}}</span></p> 
+                            <p>Date du Match : <span>{{ticket.match.date}}</span></p> 
+                            <p>Lieu du Match : <span>{{ ticket.match.lieu }}</span></p> 
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <small class="text-body-secondary">
+                            <center>
+                                <a href="{%url 'telecharger_ticket' ticket.id forloop.counter%}" class="btn btn-primary">Telecharger le Ticket</a>
+                            </center>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    </div>
+</div>
+
+<br>
+{% endblock content %}

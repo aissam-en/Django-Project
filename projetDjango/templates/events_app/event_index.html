@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">   
+    {% if user.is_authenticated %}
+    <form class="d-flex" method="post" action="{% url 'search'%}">
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_bar">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    {% endif %}
+    <br>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for event in events %}
+            <div class="col">
+                <div class="card h-100">
+                    <!-- <img src="..." class="card-img-top" alt="..."> -->
+                    <img src={{event.image.url}} class="card-img-top" alt="{{event.match}}">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h5>Match:</h5>
+                            <h6> {{event.match}}</h6>
+                        </div>
+
+                        <small><a href="{% url 'event_detail' event.id%}" class="btn btn-secondary">details</a></small>
+                    </div>
+
+                    <div class="card-footer">
+                        <small class="text-body-secondary">
+                            <center>
+                                {% if event.organisateur.categorie == 'Amateur League' %}
+                                    <img src="{% static 'Amateur League logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{event.organisateur.categorie}}">
+                                {% endif %}
+                                {% if event.organisateur.categorie == 'Botola PRO' %}
+                                    <img src="{% static 'Botola pro 1 logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{event.organisateur.categorie}}">
+                                {% endif %}
+                                {% if event.organisateur.categorie == 'Botola 2' %}
+                                    <img src="{% static 'Botola pro 2 logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{event.organisateur.categorie}}">
+                                {% endif %}
+                                {% if event.organisateur.categorie == 'Coupe du Trone' %}
+                                    <img src="{% static 'Coupe du Trone logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{event.organisateur.categorie}}">
+                                {% endif %}
+
+                                {{event.organisateur.categorie}}
+                            </center>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+{% endblock content %}

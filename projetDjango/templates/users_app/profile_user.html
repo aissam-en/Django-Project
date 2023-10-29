@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+<!-- <img src="{% static 'img/path_to_img' %}">
+<script src="{% static 'js/js.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/css.css' %}"> -->
+
+
+{% block content %}
+<br>
+
+<div class="container bg-white">
+    <h2>Mon Profil</h2>
+    <div class="row">
+        <div class="col-sm-6">
+            <br>
+            <img src="{{profile.profile_img.url}}" alt="Profile Picture" class="img-responsive" width="300" height="300" >
+        </div>
+        <div class="col-sm-6">
+            <ul class="list-group">
+                <li class="list-group-item">ID : {{profile.id}}</li>
+                <li class="list-group-item">Type Compte :  {{profile.user_type}}</li>
+            </ul>
+            <br>
+            <ul class="list-group">
+                <li class="list-group-item">Nom : {{profile.nom}}</li>
+                <li class="list-group-item">Prenom : {{profile.prenom}}</li>
+                <li class="list-group-item">Email : {{profile.email}}</li>
+                <li class="list-group-item">Address : {{profile.addresse}}</li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <a href="{% url 'modifier_profil' profile.id%}" class="btn btn-success">Modifier mon profil</a>
+</div>
+
+{% endblock content %}
+

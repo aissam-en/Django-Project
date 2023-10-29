@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">   
+    {% if user.is_authenticated %}
+    <form class="d-flex" method="post" action="{% url 'search'%}">
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_bar">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    {% endif %}
+
+    <br><p>{{ matchs_list.0.organisateur.description }}</p><br>
+</div>
+
+
+<div class="container">    
+    {% if search_bar_val %}
+        <h3>Vous cherchez : "{{search_bar_val}}"</h3>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            {% for m in matchs %}
+                <div class="col">
+                <div class="card h-100">
+                    <!-- <img src="..." class="card-img-top" alt="..."> -->
+                    <img src={{m.image.url}} class="card-img-top" alt="{{m.match}}">
+                    <div class="card-body">
+                        <h5 class="card-title">Date: {{m.date}}</h5>
+                        <p class="card-text">
+                            Match: {{m.match}}.
+                            <br>
+                            Lieu: {{m.lieu}}.
+                        </p>
+                        {% if user.is_authenticated %}
+                        {% for group in user.groups.all %}
+                            {% if group.name == 'client_group' %}
+                            <a href="{% url 'ticket_acheter' m.id request.user.id%}" class="btn btn-primary">Acheter Ticket</a>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        <small><a href="{% url 'event_detail' m.id%}" class="btn btn-secondary">details</a></small>
+                    </div>
+
+                    <div class="card-footer">
+                    <small class="text-body-secondary"><center>
+                        {% if m.organisateur.categorie == 'Amateur League' %}
+                            <img src="{% static 'Amateur League logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{m.organisateur.categorie}}">
+                        {% endif %}
+                        {% if m.organisateur.categorie == 'Botola PRO' %}
+                            <img src="{% static 'Botola pro 1 logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{m.organisateur.categorie}}">
+                        {% endif %}
+                        {% if m.organisateur.categorie == 'Botola 2' %}
+                            <img src="{% static 'Botola pro 2 logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{m.organisateur.categorie}}">
+                        {% endif %}
+                        {% if m.organisateur.categorie == 'Coupe du Trone' %}
+                            <img src="{% static 'Coupe du Trone logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{m.organisateur.categorie}}">
+                        {% endif %}
+
+                        {{m.organisateur.categorie}}
+                    </center></small>
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <h1>Makhsekch tkon hna</h1>
+    {% endif %}
+</div>
+<br>
+{% endblock content %}
+
+
+

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center bg-white">
+    <div class="content">       
+        <img src={{detail.image.url}} class="card-img-top" alt="{{detail.match}}">
+        <h5>Date: {{detail.date}}</h5>
+        <p>
+            Match: {{detail.match}}.
+            <br>
+            Lieu: {{detail.lieu}}.
+        </p>
+        <!-- href="" -->
+        {% if user.is_authenticated %}
+            {% for group in user.groups.all %}
+                {% if group.name == 'client_group' %}
+                    <a href="{% url 'ticket_acheter' detail.id request.user.id%}" class="btn btn-primary">Acheter Ticket</a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        <br>
+        <small class="text-body-secondary">
+            <center>
+                {% if detail.organisateur.categorie == 'Amateur League' %}
+                    <img src="{% static 'Amateur League logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{detail.organisateur.categorie}}">
+                {% endif %}
+                {% if detail.organisateur.categorie == 'Botola PRO' %}
+                    <img src="{% static 'Botola pro 1 logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{detail.organisateur.categorie}}">
+                {% endif %}
+                {% if detail.organisateur.categorie == 'Botola 2' %}
+                    <img src="{% static 'Botola pro 2 logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{detail.organisateur.categorie}}">
+                {% endif %}
+                {% if detail.organisateur.categorie == 'Coupe du Trone' %}
+                    <img src="{% static 'Coupe du Trone logo.png'%}" style="height: 40px; width: auto;" class="card-img-top" alt="{{detail.organisateur.categorie}}">
+                {% endif %}
+
+                {{detail.organisateur.categorie}}
+            </center>
+        </small>
+        
+    </div>
+</div>
+<br>
+{% endblock content %}
