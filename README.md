@@ -3,7 +3,10 @@
 Gestion et réservation en ligne d'événements de matchs de football.
 
 ## 🛠️ Languages
-* Python, HTML, CSS et JS.
+* Python
+* HTML
+* CSS
+* JS
 
 ## ⚙️ Technologies
 * Django
